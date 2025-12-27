@@ -1,11 +1,16 @@
 import <Windows.h>;
+import sqlite;
+import sqlitedefault;
 import window;
 import wndproc;
+
+using sqlite::Sql;
+using sqlitedefault::DATABASE_NAME, sqlitedefault::SKIN_DB_INI;
 /*
 * 函数名：		createWindow
 * 参数：		hIns
-* 修改时间：	20251225
-* 修改内容：	修改了亮色模式下的背景色为白色
+* 修改时间：	20251228
+* 修改内容：	接入数据库用于自定义界面
 */
 bool window::createWindow(HINSTANCE& hIns)
 {
@@ -15,6 +20,8 @@ bool window::createWindow(HINSTANCE& hIns)
 	win.lpfnWndProc = wndProc;
 	win.lpszClassName = L"Main";
 	win.style = CS_HREDRAW | CS_VREDRAW;
+
+	Sql s(DATABASE_NAME, SKIN_DB_INI);
 
 	// 根据系统颜色选择颜色
 	if (ifDarkTheme())

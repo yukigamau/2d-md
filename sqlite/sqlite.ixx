@@ -4,7 +4,7 @@ import <sqlite3.h>;
 
 import std;
 
-using std::function, std::runtime_error, std::wstring;
+using std::function, std::runtime_error, std::vector, std::wstring;
 
 /*
 * √¸√˚ø’º‰√˚£∫	sqlite
@@ -17,17 +17,21 @@ export namespace sqlite
 	class Sql
 	{
 	private:
-		sqlite3* db;
+		sqlite3* pdb = nullptr;
+		sqlite3_stmt* stmt = nullptr;
 
 	public:
 		Sql(const wstring& s);
 		Sql(const wstring& s, const wstring& ini);
-
-	public:
-		void exec(const wstring& s);
+		~Sql();
 
 	private:
+		void exec(const wstring& s, bool ifSave);
 		void open(const wstring& s);
+
+	public:
+		
+		void select(const wstring& table, const vector<wstring>& list);
 	};
 }
 
@@ -38,26 +42,43 @@ sqlite::Sql::Sql(const wstring& s)
 sqlite::Sql::Sql(const wstring& s, const wstring& ini)
 {
 	open(s);
+	exec(ini, false);
+}
+sqlite::Sql::~Sql()
+{
+	if (stmt)
+		sqlite3_finalize(stmt);
+	if (pdb)
+		sqlite3_close(pdb);
 }
 
-void sqlite::Sql::exec(const wstring& s)
+void sqlite::Sql::exec(const wstring& s, bool ifSave)
 {
-	sqlite3_stmt* _stmt;
-
-	int rc = sqlite3_prepare16_v2(db, s.c_str(), -1, &_stmt, nullptr);
+	int rc = sqlite3_prepare16_v2(pdb, s.c_str(), -1, &stmt, nullptr);
 	if (rc != SQLITE_OK)
 		throw runtime_error("sql”Ô∑®¥ÌŒÛ°£");
 
-	rc=sqlite3_step(_stmt);
+	rc=sqlite3_step(stmt);
 	if (rc != SQLITE_DONE && rc != SQLITE_ROW)
 		throw runtime_error("sql”Ôæ‰÷¥–– ß∞‹°£");
 
-	sqlite3_finalize(_stmt);
+	if (ifSave)
+		sqlite3_finalize(stmt);
 }
 
 void sqlite::Sql::open(const wstring& s)
 {
-	int rc = sqlite3_open16(s.c_str(), &db);
+	int rc = sqlite3_open16(s.c_str(), &pdb);
 	if (rc)
 		throw runtime_error("sql”Ô∑®¥ÌŒÛ°£");
+}
+
+void sqlite::Sql::select(const wstring& table, const vector<wstring>& list)
+{
+	wstring sql = L"SELECT ";
+	for (const auto& s : list)
+		sql += s + L" ";
+
+	sql += table;
+	exec(sql, true);
 }

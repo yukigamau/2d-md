@@ -13,9 +13,15 @@ using std::string, std::wstring;
 */
 export namespace sqlitedefault
 {
-#if UNICODE
 	const wstring DATABASE_NAME = L"database.db";
-#elif
-	const string DATABASE_NAME = "database.db";
-#endif
+	/*
+	* theme参数说明：	default跟随系统
+	*					dark深色
+	*					light浅色
+	*/
+	const wstring SKIN_DB_INI = L"CREATE TABLE IF NOT EXISTS skindb("
+		L"name TEXT PRIMARY KEY, "
+		L"data TEXT);"
+		L"INSERT INTO skindb (name, data) "
+		L"VALUES ('theme', 'default');";
 }

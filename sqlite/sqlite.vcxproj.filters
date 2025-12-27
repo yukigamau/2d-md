@@ -21,5 +21,19 @@
     <ClCompile Include="sqlitedefault.ixx">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\thirdParty\sqlite-amalgamation-3510100\shell.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdParty\sqlite-amalgamation-3510100\sqlite3.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\thirdParty\sqlite-amalgamation-3510100\sqlite3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\thirdParty\sqlite-amalgamation-3510100\sqlite3ext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

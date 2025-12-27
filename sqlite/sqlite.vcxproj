@@ -40,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -129,8 +129,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\thirdParty\sqlite-amalgamation-3510100\shell.c" />
+    <ClCompile Include="..\..\..\thirdParty\sqlite-amalgamation-3510100\sqlite3.c" />
     <ClCompile Include="sqlite.ixx" />
     <ClCompile Include="sqlitedefault.ixx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\thirdParty\sqlite-amalgamation-3510100\sqlite3.h" />
+    <ClInclude Include="..\..\..\thirdParty\sqlite-amalgamation-3510100\sqlite3ext.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
