@@ -1,8 +1,6 @@
-module;
+export module window;
 import <Windows.h>;
 import std;
-
-export module window;
 
 /*
 * ÃüÃû¿Õ¼äÃû£º	window

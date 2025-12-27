@@ -1,8 +1,5 @@
-module;
-
-import <Windows.h>;
-
 export module wndproc;
+import <Windows.h>;
 
 import window;
 
