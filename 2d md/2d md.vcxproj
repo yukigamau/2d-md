@@ -134,6 +134,11 @@
     <ClCompile Include="window.ixx" />
     <ClCompile Include="wndproc.ixx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sqlite\sqlite.vcxproj">
+      <Project>{72db1b2d-ceb0-483d-a597-0ecba2747cef}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
